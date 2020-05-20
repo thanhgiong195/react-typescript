@@ -23,6 +23,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -42,6 +44,8 @@
     ]
   },
   "devDependencies": {
-    "@types/shortid": "0.0.29"
-  }
+    "@types/shortid": "0.0.29",
+    "gh-pages": "^2.2.0"
+  },
+  "homepage": "https://thanhgiong195.github.io/react-typescript"
 }

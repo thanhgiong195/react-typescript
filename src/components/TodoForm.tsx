@@ -1,39 +1,29 @@
 // Import dependencies
-import * as React from 'react'
+import React, {useState, useRef} from 'react'
 import shortid from 'shortid'
 
-// Import interfaces
 import { TodoInterface, TodoFormInterface } from '../interfaces'
 
-// Todo form component
 const TodoForm = (props: TodoFormInterface) => {
-    // Create ref for form input
-    const inputRef = React.useRef<HTMLInputElement>(null)
+    const inputRef = useRef<HTMLInputElement>(null)
 
-    // Create form state
-    const [formState, setFormState] = React.useState('')
+    const [formState, setFormState] = useState('')
 
-    // Handle todo input change
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-        // Update form state with the text from input
         setFormState(event.target.value)
     }
 
-    // Handle 'Enter' in todo input
     function handleInputEnter(event: React.KeyboardEvent) {
-        // Check for 'Enter' key
         if (event.key === 'Enter') {
-            // Prepare new todo object
+
             const newTodo: TodoInterface = {
                 id: shortid.generate(),
                 name: formState,
                 isManager: false
             }
 
-            // Create new todo item
             props.handleTodoCreate(newTodo)
 
-            // Reset the input field
             if (inputRef && inputRef.current) {
                 inputRef.current.value = ''
             }

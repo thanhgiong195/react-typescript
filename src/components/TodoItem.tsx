@@ -6,6 +6,21 @@ import { TodoItemInterface } from '../interfaces'
 
 // TodoItem component
 const TodoItem = (props: TodoItemInterface) => {
+    const inputRef = React.useRef<HTMLInputElement>(null)
+
+    const [formState, setFormState] = React.useState('')
+
+    function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+        setFormState(event.target.value)
+        console.log(event.target.value);
+    }
+
+    function handleInputEnter(event: React.KeyboardEvent) {
+        if (event.key === 'Enter') {
+            props.handleTodoUpdate(formState, props.todo.id)
+        }
+    }
+
     return (
         <div className="todo-item">
             <div onClick={() => props.handleTodoComplete(props.todo.id)}>
@@ -18,11 +33,11 @@ const TodoItem = (props: TodoItemInterface) => {
 
             <div className="todo-item-input-wrapper">
                 <input
+                    ref={inputRef}
                     value={props.todo.name}
                     onBlur={props.handleTodoBlur}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        props.handleTodoUpdate(event, props.todo.id)
-                    }
+                    onChange={event => handleInputChange(event)}
+                    onKeyPress={event => handleInputEnter(event)}
                 />
             </div>
 
