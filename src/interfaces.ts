@@ -1,18 +1,18 @@
 // Todo interface
-export interface TodoInterface {
+export type TodoInterface = {
 	id: string;
 	name: string;
 	isManager: boolean;
 }
 
 // Todo form interface
-export interface TodoFormInterface {
+export type TodoFormInterface = {
 	todos: TodoInterface[];
 	handleTodoCreate: (todo: TodoInterface) => void;
 }
 
 // Todo list interface
-export interface TodoListInterface {
+export type TodoListInterface = {
 	handleTodoUpdate: (name:string, id: string) => void;
 	handleTodoRemove: (id: string) => void;
 	handleTodoComplete: (id: string) => void;
@@ -21,7 +21,7 @@ export interface TodoListInterface {
 }
 
 // Todo item interface
-export interface TodoItemInterface {
+export type TodoItemInterface = {
 	handleTodoUpdate: (name: string, id: string) => void;
 	handleTodoRemove: (id: string) => void;
 	handleTodoComplete: (id: string) => void;

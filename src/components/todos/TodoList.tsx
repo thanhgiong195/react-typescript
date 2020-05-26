@@ -3,7 +3,7 @@ import * as React from 'react'
 
 import TodoItem from './TodoItem'
 
-import { TodoListInterface } from '../interfaces'
+import { TodoListInterface } from '../../interfaces'
 
 const TodoList = (props: TodoListInterface) => {
     return (

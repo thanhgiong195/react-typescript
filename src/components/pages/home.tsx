@@ -1,29 +1,27 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import TodoForm from './components/TodoForm'
-import TodoList from './components/TodoList'
+import { TodoInterface } from '../../interfaces'
 
-import { TodoInterface } from './interfaces'
+import TodoForm from '../todos/TodoForm'
+import TodoList from '../todos/TodoList'
 
-import './styles/styles.css'
+import '../../styles/styles.css'
 
-const TodoListApp = () => {
+export function Home () {
     const [todos, setTodos] = useState<TodoInterface[]>([])
     const [loading, setLoading] = useState<Boolean>(false)
 
+    async function fetchData() {
+        setLoading(true);
+
+        const response = await axios('/Customer');
+
+        setTodos(response.data);
+        setLoading(false);
+    }
+
     useEffect(() => {
-        console.log('Fetching data...');
-
-        async function fetchData() {
-            setLoading(true);
-
-            const response = await axios('/Customer');
-
-            setTodos(response.data);
-            setLoading(false);
-        }
-
         fetchData();
     }, []);
 
@@ -44,7 +42,7 @@ const TodoListApp = () => {
                 name: name
             }
         ).catch(err => console.log(err))
-        
+
         const newTodosState: TodoInterface[] = [...todos]
         newTodosState.find((todo: TodoInterface) => todo.id === id)!.name = name
         setTodos(newTodosState)
@@ -83,8 +81,7 @@ const TodoListApp = () => {
     }
 
     return (
-        <div className="todo-list-app">
-            
+        <div className="todo-list-app mt-4">
             <TodoForm
                 todos={todos}
                 handleTodoCreate={handleTodoCreate}
@@ -102,5 +99,3 @@ const TodoListApp = () => {
         </div>
     )
 }
-
-export default TodoListApp;

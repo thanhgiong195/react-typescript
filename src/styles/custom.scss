@@ -10,4 +10,16 @@ body {
 	h3 {
 		color: red;
 	}
+
+	.header {
+		.nav-link {
+			&.active {
+				border-bottom: 1px solid;
+			}
+		}
+	}
+}
+
+.card {
+	width: 600px;
 }

@@ -2,7 +2,7 @@
 import React, {useState, useRef} from 'react'
 import shortid from 'shortid'
 
-import { TodoInterface, TodoFormInterface } from '../interfaces'
+import { TodoInterface, TodoFormInterface } from '../../interfaces'
 
 const TodoForm = (props: TodoFormInterface) => {
     const inputRef = useRef<HTMLInputElement>(null)
