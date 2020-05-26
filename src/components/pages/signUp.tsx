@@ -1,4 +1,5 @@
 import React, { useContext} from 'react'
+import '../../styles/common.css'
 import { SampleContext } from '../../userContext'
 
 interface Props {
@@ -20,7 +21,7 @@ export function SignUp (props: Props) {
                         className="form-control"
                         id="email"
                         aria-describedby="emailHelp"
-                        placeholder="Enter email"
+                        placeholder="Email"
                     />
                     <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
@@ -40,12 +41,14 @@ export function SignUp (props: Props) {
                         placeholder="Confirm Password"
                     />
                 </div>
-                <button
-                    type="submit"
-                    className="btn btn-primary text-center"
-                >
-                    Register
-                </button>
+                <div className="button-common">
+                    <button
+                        type="submit"
+                        className="btn btn-primary text-center"
+                    >
+                        Register
+                    </button>
+                </div>
             </form>
         </div>
     )

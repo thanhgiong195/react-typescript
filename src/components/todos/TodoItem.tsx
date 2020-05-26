@@ -5,7 +5,7 @@ import * as React from "react";
 import { TodoItemInterface } from '../../interfaces'
 
 // TodoItem component
-const TodoItem = (props: TodoItemInterface) => {
+export const TodoItem = (props: TodoItemInterface) => {
     const inputRef = React.useRef<HTMLInputElement>(null)
 
     const [formState, setFormState] = React.useState('')
@@ -17,14 +17,14 @@ const TodoItem = (props: TodoItemInterface) => {
 
     function handleInputEnter(event: React.KeyboardEvent) {
         if (event.key === 'Enter') {
-            props.handleTodoUpdate(formState, props.todo.id)
+            props.handleTodoUpdate(formState, props.todos.id)
         }
     }
 
     return (
         <div className="todo-item">
-            <div onClick={() => props.handleTodoComplete(props.todo.id)}>
-                {props.todo.isManager ? (
+            <div onClick={() => props.handleTodoComplete(props.todos.id)}>
+                {props.todos.isManager ? (
                     <span className="todo-item-checked">✔</span>
                 ) : (
                     <span className="todo-item-unchecked" />
@@ -34,16 +34,14 @@ const TodoItem = (props: TodoItemInterface) => {
             <div className="todo-item-input-wrapper">
                 <input
                     ref={inputRef}
-                    value={props.todo.name}
+                    value={props.todos.name}
                     onBlur={props.handleTodoBlur}
                     onChange={event => handleInputChange(event)}
                     onKeyPress={event => handleInputEnter(event)}
                 />
             </div>
 
-            <div className="item-remove" onClick={() => props.handleTodoRemove(props.todo.id)}>⨯</div>
+            <div className="item-remove" onClick={() => props.handleTodoRemove(props.todos.id)}>⨯</div>
         </div>
     );
 };
-
-export default TodoItem;

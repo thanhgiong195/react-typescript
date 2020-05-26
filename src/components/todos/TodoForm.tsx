@@ -4,7 +4,7 @@ import shortid from 'shortid'
 
 import { TodoInterface, TodoFormInterface } from '../../interfaces'
 
-const TodoForm = (props: TodoFormInterface) => {
+export const TodoForm = (props: TodoFormInterface) => {
     const inputRef = useRef<HTMLInputElement>(null)
 
     const [formState, setFormState] = useState('')
@@ -42,5 +42,3 @@ const TodoForm = (props: TodoFormInterface) => {
         </div>
     )
 }
-
-export default TodoForm

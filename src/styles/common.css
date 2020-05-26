@@ -1,0 +1,7 @@
+.button-common {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.button-common .btn {
+    width: 50%;
+}
