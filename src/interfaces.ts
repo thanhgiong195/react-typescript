@@ -26,5 +26,5 @@ export type TodoItemInterface = {
 	handleTodoRemove: (id: string) => void;
 	handleTodoComplete: (id: string) => void;
 	handleTodoBlur: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	todo: TodoInterface;
+	todos: TodoInterface;
 }

@@ -16,6 +16,9 @@ const header = (props: Props) => {
                 <NavLink exact className="nav-link" to="/signup">
                     SignUp
                 </NavLink>
+                <NavLink exact className="nav-link" to="/resetpass">
+                    ResetPass
+                </NavLink>
             </nav>
         </div>
     );

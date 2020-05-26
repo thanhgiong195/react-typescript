@@ -8,6 +8,7 @@ import Header from './components/organism/header'
 import { Home } from './components/pages/home'
 import { login } from './components/pages/login'
 import { signUp } from './components/pages/signUp'
+import { resetPass } from './components/pages/resetPass'
 
 import { SampleContext, useUpdateContext } from './useContext'
 
@@ -25,6 +26,7 @@ export function App() {
                             <Route exact path="/login" component={login} />
                             <Route exact path="/signup" component={signUp} />
                             <Route exact path="/" component={Home} />
+                            <Route exact path="/resetpass" component={resetPass} />
                         </Switch>
                     </div>
                 </Router>

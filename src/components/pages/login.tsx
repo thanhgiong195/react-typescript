@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../styles/common.css'
 
 interface Props {
 
@@ -14,7 +15,7 @@ export function login(props: Props) {
                         className="form-control"
                         id="email"
                         aria-describedby="emailHelp"
-                        placeholder="Enter email"
+                        placeholder="Email"
                     />
                 </div>
                 <div className="form-group text-left">
@@ -25,12 +26,14 @@ export function login(props: Props) {
                         placeholder="Password"
                     />
                 </div>
-                <button
-                    type="submit"
-                    className="btn btn-primary text-center"
-                >
-                    Login
-                </button>
+                <div className='button-common'>
+                    <button
+                        type="submit"
+                        className="btn btn-primary text-center"
+                    >
+                        Login
+                    </button>
+                </div>
             </form>
         </div>
     )

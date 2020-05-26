@@ -3,8 +3,8 @@ import axios from 'axios';
 
 import { TodoInterface } from '../../interfaces'
 
-import TodoForm from '../todos/TodoForm'
-import TodoList from '../todos/TodoList'
+import { TodoForm } from '../todos/TodoForm'
+import { TodoList } from '../todos/TodoList'
 
 import '../../styles/styles.css'
 
