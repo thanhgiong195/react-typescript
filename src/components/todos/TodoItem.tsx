@@ -41,7 +41,7 @@ export const TodoItem = (props: TodoItemInterface) => {
                 />
             </div>
 
-            <div className="item-remove" onClick={() => props.handleTodoRemove(props.todos.id)}>⨯</div>
+            <div className="item-remove" onClick={() => props.handleTodoRemove(props.todos.name, props.todos.id)}>⨯</div>
         </div>
     );
 };

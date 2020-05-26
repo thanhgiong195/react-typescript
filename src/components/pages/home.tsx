@@ -28,11 +28,16 @@ export function Home () {
     // Creating new todo item
     const handleTodoCreate = (todo: TodoInterface) => {
         const newTodosState: TodoInterface[] = [...todos]
-
-        axios.post(`/Customer`, todo).then(() => {
-            newTodosState.push(todo)
-            setTodos(newTodosState)
-        }).catch(err => console.log(err))
+        if (todo.name !== '') {
+            axios.post(`/Customer`, todo).then(() => {
+                
+                    newTodosState.push(todo)
+                    setTodos(newTodosState)
+                
+            }).catch(err => console.log(err))
+        } else {
+            window.alert("Please input todos name!");
+        }
     }
 
     // Update existing todo item
@@ -49,11 +54,13 @@ export function Home () {
     }
 
     // Remove existing todo item
-    const handleTodoRemove = (id: string) => {
-        axios.delete(`/Customer/${id}`).then(() => {
-            const newTodosState: TodoInterface[] = todos.filter((todo: TodoInterface) => todo.id !== id)
-            setTodos(newTodosState)
-        }).catch(err => console.log(err))
+    const handleTodoRemove = (name: string, id: string) => {
+        if (window.confirm('Delete '+ name + ' ?')) {
+            axios.delete(`/Customer/${id}`).then(() => {
+                const newTodosState: TodoInterface[] = todos.filter((todo: TodoInterface) => todo.id !== id)
+                setTodos(newTodosState)
+            }).catch(err => console.log(err))
+        }
     }
 
     // Check existing todo item as completed
