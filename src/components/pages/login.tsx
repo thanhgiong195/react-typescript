@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useContext, } from 'react'
 import '../../styles/common.css'
+import { SampleContext } from '../../userContext'
 
 interface Props {
 
 }
 
-export function login(props: Props) {
+export function Login(props: Props) {
+    const context = useContext(SampleContext);
     return (
         <div className="card col-12 login-card mt-4 hv-center">
+            <div>
+                <button type="button" onClick={() => context.updateData('Change')}>テスト</button>
+                <p>{context.sample}</p>
+            </div>
             <form>
                 <div className="form-group text-left mt-2">
                     <label htmlFor="exampleInputEmail1">Email</label>
