@@ -44,7 +44,10 @@ const buttonStyle = css(`
   color: #007bff;
   background-color: transparent;
   padding: 0.5rem 1rem;
+  outline: none;
+
   &:focus {
     border: none;
+    outline: none;
   }
 `);

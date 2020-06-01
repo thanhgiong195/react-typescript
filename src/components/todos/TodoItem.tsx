@@ -52,10 +52,12 @@ const buttonStyle = css(`
   box-shadow: none;
   transition: 0.25s color ease-in-out;
   background-color: transparent;
+  outline: none;
 
   &:hover, &:focus {
     color: #111;
     box-shadow: none;
     border: none;
+    outline: none;
   }
 `);
