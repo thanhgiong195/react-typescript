@@ -19,16 +19,8 @@ export const TodoItem = (props: TodoItemInterface) => {
 
   return (
     <div className="todo-item">
-      <button
-        type="button"
-        className={buttonStyle}
-        onClick={() => props.handleTodoComplete(props.todos.id)}
-      >
-        {props.todos.isManager ? (
-          <span className="todo-item-checked">✔</span>
-        ) : (
-          <span className="todo-item-unchecked" />
-        )}
+      <button type="button" className={buttonStyle} onClick={() => props.handleTodoComplete(props.todos.id)}>
+        {props.todos.isManager ? <span className="todo-item-checked">✔</span> : <span className="todo-item-unchecked" />}
       </button>
 
       <div className="todo-item-input-wrapper">
@@ -41,12 +33,12 @@ export const TodoItem = (props: TodoItemInterface) => {
         />
       </div>
 
-      <button
-        type="button"
-        className={buttonStyle}
-        onClick={() => props.handleTodoRemove(props.todos.id)}
-      >
+      <button type="button" className={buttonStyle} onClick={() => props.handleTodoRemove(props.todos.id, props.todos.name)}>
         ⨯
+      </button>
+
+      <button type="button" className={buttonStyle} onClick={() => props.handleToDetail(props.todos.id)}>
+        detail
       </button>
     </div>
   );

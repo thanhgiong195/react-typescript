@@ -10,6 +10,7 @@ import { Auth } from './services/auth';
 import { Login } from './components/pages/login';
 import { SignUp } from './components/pages/signUp';
 import { resetPass } from './components/pages/resetPass';
+import { ItemDetail } from './components/pages/itemDetail';
 
 import { SampleContext, useUpdateContext } from './userContext';
 
@@ -29,6 +30,7 @@ export function App() {
             <Auth>
               <Switch>
                 <Route exact path="/" component={Home} />
+                <Route exact path="/detail/:id" component={ItemDetail} />
               </Switch>
             </Auth>
           </Switch>

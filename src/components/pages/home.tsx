@@ -7,13 +7,16 @@ import { TodoForm } from '../todos/TodoForm';
 import { TodoList } from '../todos/TodoList';
 
 import '../../styles/styles.css';
+import { RouteComponentProps } from 'react-router-dom';
 
-export function Home() {
+interface Props extends RouteComponentProps {}
+
+export function Home(props: Props) {
   const [todos, setTodos] = useState<TodoInterface[]>([]);
   const [loading, setLoading] = useState<Boolean>(false);
 
   async function fetchData() {
-    setLoading(true);
+		setLoading(true);
 
     const response = await axios('/Customer');
 
@@ -27,47 +30,55 @@ export function Home() {
 
   // Creating new todo item
   const handleTodoCreate = (todo: TodoInterface) => {
-    const newTodosState: TodoInterface[] = [...todos];
+    if (todo.name !== '') {
+			const newTodosState: TodoInterface[] = [...todos];
+			axios
+					.post(`/Customer`, todo)
+					.then(() => {
+					newTodosState.push(todo);
+					setTodos(newTodosState);
+					})
+					.catch(error => {
+					throw error;
+					});
+    } else {
+			alert("Please input name!");
+		}
 
-    axios
-      .post(`/Customer`, todo)
-      .then(() => {
-        newTodosState.push(todo);
-        setTodos(newTodosState);
-      })
-      .catch(error => {
-        throw error;
-      });
   };
 
   // Update existing todo item
   const handleTodoUpdate = (name: string, id: string) => {
-    axios
-      .put(`/Customer/${id}`, {
-        name,
-      })
-      .catch(error => {
-        throw error;
-      });
+		if (name !== '') {
+				axios
+				.put(`/Customer/${id}`, {
+					name,
+				})
+				.catch(error => {
+					throw error;
+				});
 
-    const newTodosState: TodoInterface[] = [...todos];
-    newTodosState.find((todo: TodoInterface) => todo.id === id)!.name = name;
-    setTodos(newTodosState);
+			const newTodosState: TodoInterface[] = [...todos];
+			newTodosState.find((todo: TodoInterface) => todo.id === id)!.name = name;
+			setTodos(newTodosState);
+		} else {
+			alert("Please input name!");
+		}
   };
 
   // Remove existing todo item
-  const handleTodoRemove = (id: string) => {
-    axios
+  const handleTodoRemove = (id: string, name: string) => {
+		if (window.confirm(`Delete item: ${name} !`)) {
+			axios
       .delete(`/Customer/${id}`)
       .then(() => {
-        const newTodosState: TodoInterface[] = todos.filter(
-          (todo: TodoInterface) => todo.id !== id,
-        );
+        const newTodosState: TodoInterface[] = todos.filter((todo: TodoInterface) => todo.id !== id);
         setTodos(newTodosState);
       })
       .catch(error => {
         throw error;
       });
+		}
   };
 
   // Check existing todo item as completed
@@ -75,13 +86,10 @@ export function Home() {
     const newTodosState: TodoInterface[] = [...todos];
 
     axios.put(`/Customer/${id}`, {
-      isManager: !newTodosState.find((todo: TodoInterface) => todo.id === id)!
-        .isManager,
+      isManager: !newTodosState.find((todo: TodoInterface) => todo.id === id)!.isManager,
     });
 
-    newTodosState.find(
-      (todo: TodoInterface) => todo.id === id,
-    )!.isManager = !newTodosState.find((todo: TodoInterface) => todo.id === id)!
+    newTodosState.find((todo: TodoInterface) => todo.id === id)!.isManager = !newTodosState.find((todo: TodoInterface) => todo.id === id)!
       .isManager;
 
     setTodos(newTodosState);
@@ -94,7 +102,11 @@ export function Home() {
     } else {
       event.target.classList.remove('todo-input-error');
     }
-  };
+	};
+	
+	const handleToDetail = (id: string) => {
+		props.history.push(`/detail/${id}`);
+	}
 
   return (
     <div className="todo-list-app mt-4">
@@ -108,7 +120,8 @@ export function Home() {
           handleTodoUpdate={handleTodoUpdate}
           handleTodoRemove={handleTodoRemove}
           handleTodoComplete={handleTodoComplete}
-          handleTodoBlur={handleTodoBlur}
+					handleTodoBlur={handleTodoBlur}
+					handleToDetail={handleToDetail}
         />
       )}
     </div>

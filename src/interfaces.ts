@@ -14,17 +14,19 @@ export type TodoFormInterface = {
 // Todo list interface
 export type TodoListInterface = {
   handleTodoUpdate: (name: string, id: string) => void;
-  handleTodoRemove: (id: string) => void;
+  handleTodoRemove: (id: string, name: string) => void;
   handleTodoComplete: (id: string) => void;
   handleTodoBlur: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleToDetail: (id: string) => void;
   todos: TodoInterface[];
 };
 
 // Todo item interface
 export type TodoItemInterface = {
   handleTodoUpdate: (name: string, id: string) => void;
-  handleTodoRemove: (id: string) => void;
+  handleTodoRemove: (id: string, name: string) => void;
   handleTodoComplete: (id: string) => void;
   handleTodoBlur: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleToDetail: (id: string) => void;
   todos: TodoInterface;
 };
