@@ -1,55 +1,101 @@
-import React, { useContext} from 'react'
-import '../../styles/common.css'
-import { SampleContext } from '../../userContext'
+import React, { useState } from 'react';
+import '../../styles/common.css';
 
-interface Props {
+interface Props {}
 
-}
+export type FormInterface = {
+  email: string;
+  password: string;
+};
 
-export function SignUp (props: Props) {
-    const context = useContext(SampleContext);
-    return (
-        <div className="card col-12 login-card mt-4 hv-center">
-            <div>
-                <button type="button" onClick={() => context.updateData2('Change2')}>テスト</button>
-                <p>{context.sample}</p>
+export function SignUp(props: Props) {
+  const [isConfirm, setIsConfirm] = useState<boolean>(false);
+  const [formData, updateFormData] = React.useState<FormInterface>({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateFormData({
+      ...formData,
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
+
+  const handleConfirm = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsConfirm(true);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
+  return (
+    <div className="card col-12 login-card mt-4 hv-center">
+      {!isConfirm ? (
+        <div>
+          <h3>Form Sign up</h3>
+          <form onSubmit={handleConfirm} id="FormData">
+            <div className="form-group text-left mt-2">
+              <label htmlFor="exampleInputEmail1">
+                Email address
+                <input type="email" className="form-control" id="email" name="email" placeholder="Email" required onChange={handleChange} />
+              </label>
             </div>
-            <form>
-                <div className="form-group text-left mt-2">
-                    <label htmlFor="exampleInputEmail1">Email address</label>
-                    <input type="email"
-                        className="form-control"
-                        id="email"
-                        aria-describedby="emailHelp"
-                        placeholder="Email"
-                    />
-                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                <div className="form-group text-left">
-                    <label htmlFor="exampleInputPassword1">Password</label>
-                    <input type="password"
-                        className="form-control"
-                        id="password"
-                        placeholder="Password"
-                    />
-                </div>
-                <div className="form-group text-left">
-                    <label htmlFor="exampleInputPassword1">Confirm Password</label>
-                    <input type="password"
-                        className="form-control"
-                        id="confirmPassword"
-                        placeholder="Confirm Password"
-                    />
-                </div>
-                <div className="button-common">
-                    <button
-                        type="submit"
-                        className="btn btn-primary text-center"
-                    >
-                        Register
-                    </button>
-                </div>
-            </form>
+            <div className="form-group text-left">
+              <label htmlFor="exampleInputEmail1">
+                Password
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                  required
+                  onChange={handleChange}
+                />
+              </label>
+            </div>
+            <div className="form-group text-left">
+              <label htmlFor="exampleInputPassword1">
+                Confirm Password
+                <input
+                  type="password"
+                  className="form-control"
+                  id="confirmPassword"
+                  name="ConfirmPassword"
+                  placeholder="Confirm Password"
+                  required
+                  onChange={handleChange}
+                />
+              </label>
+            </div>
+            <div className="button-common">
+              <button type="submit" className="btn btn-primary text-center">
+                Register
+              </button>
+            </div>
+          </form>
         </div>
-    )
+      ) : (
+        <div>
+          <h3>Confirm data</h3>
+          <form onSubmit={handleSubmit} id="FormDataConfirm">
+            <div className="form-group text-left mt-2">
+              <p>Email address: {formData.email}</p>
+            </div>
+            <div className="form-group text-left">
+              <p>Password: *******</p>
+            </div>
+            <div className="button-common">
+              <button type="submit" className="btn btn-primary text-center">
+                Register
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+    </div>
+  );
 }
