@@ -9,7 +9,11 @@ export type ButtonProps = {
 
 export function Button(props: ButtonProps) {
   return (
-    <button className={props.buttonClass ? props.buttonClass : buttonStyle} type="button" onClick={props.onClickEvent}>
+    <button
+      className={props.buttonClass ? props.buttonClass : buttonStyle}
+      type="button"
+      onClick={props.onClickEvent}
+    >
       {props.text}
     </button>
   );
